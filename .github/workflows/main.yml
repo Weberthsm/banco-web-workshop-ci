@@ -1,37 +1,28 @@
 name: E2E tests
 
-# Quando deve executar essa rotina (GATILHOS)
 on:
   workflow_dispatch:
 
 jobs:
   tests: 
-
-    #[config do Sistema Operacional] (windows/linux/mac, chrome/firefox/edge)
     runs-on: ubuntu-latest
 
-    #[Variáveis] (Variáveis de ambiente, chaves de acesso a plataforrma, etc.)
     env:
-      API_BASE_URL:'http://localhost:3000'
-      PORT:4000
-    #[ações ou passos]
-    steps:
+      API_BASE_URL: 'http://localhost:3000'
+      PORT: 4000
 
+    steps:
       - name: Checkout do Repositório
         uses: actions/checkout@v4
 
       - name: Instalando as dependências
         run: npm install
-      
+
       - name: Iniciando servidor de mocks
-        run: npm run mock-server &
-      
+        run: npm run mock-server &
+
       - name: Iniciando servidor aplicação web
         run: npm run server &
-      
+
       - name: Executar os testes
         run: npx cypress run
-        
-
-        
-    
